@@ -14,7 +14,7 @@ if(WIN32)
     add_library(glfw STATIC IMPORTED)
     set_target_properties(glfw PROPERTIES
         IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/dependencies/lib/glfw3.lib"
-        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/dependencies/include"
+        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/dependencies/include/glfw3.h"
     )
     set(OPENGL_GLFW_TARGET glfw)
 else()
@@ -24,6 +24,14 @@ else()
     else()
         set(OPENGL_GLFW_TARGET glfw3::glfw)
     endif()
+endif()
+
+##if(WIN32)
+##    target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE user32 gdi32 shell32)
+##endif()
+
+if(APPLE)
+    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE GL_SILENCE_DEPRECATION)
 endif()
 
 add_executable(
