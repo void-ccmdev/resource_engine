@@ -41,6 +41,8 @@ add_executable(
 
       src/engine/engine.cpp #ENGINE
       src/engine/core/window.cpp #WINDOW
+
+      src/input/input.cpp #INPUT
       )
 
 target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/dependencies/lib)
