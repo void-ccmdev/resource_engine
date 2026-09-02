@@ -8,7 +8,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #add_subdirectory(src/engine REQUIRED)
 
-find_package(glfw3 REQUIRED)
+find_package(OpenGL REQUIRED)
+
+if(WIN32)
+    add_library(glfw STATIC IMPORTED)
+    set_target_properties(glfw PROPERTIES
+        IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/dependencies/lib/glfw3.lib"
+        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/dependencies/include"
+    )
+    set(OPENGL_GLFW_TARGET glfw)
+else()
+    find_package(glfw3 REQUIRED)
+    if(TARGET glfw3)
+        set(OPENGL_GLFW_TARGET glfw)
+    else()
+        set(OPENGL_GLFW_TARGET glfw3::glfw)
+    endif()
+endif()
 
 add_executable(
       ${CMAKE_PROJECT_NAME}
