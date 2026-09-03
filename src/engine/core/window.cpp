@@ -58,6 +58,8 @@ void Window::setClearColor(float r, float g, float b, float a) { glClearColor(r,
 int Window::shouldClose() { return glfwWindowShouldClose(m_window); }
 void Window::setShouldClose(bool value) { glfwSetWindowShouldClose(m_window, value); }
 
+GLFWwindow* Window::getGlfwWindow() { return m_window; }
+
 void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
     auto* owner = static_cast<Window*>(glfwGetWindowUserPointer(window));
     if (owner != nullptr) {

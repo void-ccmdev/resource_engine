@@ -21,6 +21,7 @@ namespace Engine {
 
             int shouldClose();
             void setShouldClose(bool value);
+            GLFWwindow* getGlfwWindow();
         private:
             static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 

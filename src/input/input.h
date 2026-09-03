@@ -12,25 +12,31 @@ namespace Input {
         bool super = false;
     };
 
-    enum DEVICE {
+    enum Device {
         KEYBOARD,
         MOUSE
     };
 
+    using Action = void (*)();
+
     struct InputEvent
     {
-        DEVICE device = KEYBOARD;
+        using Action = void (*)();
+
+        Device device = KEYBOARD;
         int key;
         Mod mod;
         int state = GLFW_PRESS;
-        std::function<void()> action;
+        Action action = nullptr;
     };
 
-
-    InputEvent events[64];
-    unsigned int eventsCount = 0;
-
-    void addEvent(InputEvent newEvent);
-    void processInput(GLFWwindow* window);
+    class InputManager {
+        public:
+            void addEvent(InputEvent newEvent);
+            void processInput(GLFWwindow* window);
+        private:
+            InputEvent events[64];
+            unsigned int eventsCount = 0;
+    };
 
 } //namespace Input

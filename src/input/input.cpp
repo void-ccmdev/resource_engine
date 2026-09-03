@@ -3,7 +3,9 @@
 
 #include <stdexcept>
 
-void Input::addEvent(InputEvent newEvent)
+using namespace Input;
+
+void InputManager::addEvent(InputEvent newEvent)
 {
     if (eventsCount >= sizeof(events) / sizeof(events[0])) {
         std::runtime_error("Too many input events! Max 64 Input events!");
@@ -14,7 +16,7 @@ void Input::addEvent(InputEvent newEvent)
     eventsCount++;
 }
 
-void Input::processInput(GLFWwindow* window)
+void InputManager::processInput(GLFWwindow* window)
 {
     for (unsigned int i = 0; eventsCount; i++) {
         if (events[i].device == KEYBOARD) {
@@ -37,6 +39,11 @@ void Input::processInput(GLFWwindow* window)
         if (events[i].mod.ctrl and events[i].mod.ctrl != CTRL) continue;
         if (events[i].mod.shift and events[i].mod.shift != SHIFT) continue;
         if (events[i].mod.super and events[i].mod.super != SUPER) continue;
+
+        if (!events[i].action) {
+            std::runtime_error("No action bound to event!");
+            return;
+        }
 
         events[i].action();
     }
