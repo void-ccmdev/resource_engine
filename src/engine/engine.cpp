@@ -22,6 +22,15 @@ int EngineApplication::run()
     Window engineWindow;
     engineWindow.create(1280, 720, title);
 
+    Input::InputEvent e_quit;
+    e_quit.name = "quit";
+    e_quit.device = Input::Device::KEYBOARD;
+    e_quit.key = GLFW_KEY_END;
+    e_quit.mod.alt = true;
+    e_quit.action = []() {  };
+
+    inputManager.addEvent(e_quit);
+
     while (running && !engineWindow.shouldClose()) {
         inputManager.processInput(engineWindow.getGlfwWindow());
         engineWindow.update();

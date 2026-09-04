@@ -14,7 +14,7 @@ if(WIN32)
     add_library(glfw STATIC IMPORTED)
     set_target_properties(glfw PROPERTIES
         IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/dependencies/lib/glfw3.lib"
-        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/dependencies/include/glfw3.h"
+        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/dependencies/include/GLFW/glfw3.h"
     )
     set(OPENGL_GLFW_TARGET glfw)
 else()
