@@ -21,9 +21,9 @@ void InputManager::processInput(GLFWwindow* window)
 {
     for (InputEvent event : events) {
         if (event.device == KEYBOARD) {
-            if (glfwGetKey(window, event.key) == event.state) continue;
+            if (glfwGetKey(window, event.key) != event.state) continue;
         } else if (event.device == MOUSE) {
-            if (glfwGetMouseButton(window, event.key) == event.state) continue;
+            if (glfwGetMouseButton(window, event.key) != event.state) continue;
         } else {
             std::runtime_error("Unknown device!");
             break;

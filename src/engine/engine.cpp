@@ -14,10 +14,6 @@ using namespace Engine;
 
 std::string title = "Engine window";
 
-void forceQuit()
-{
-    std::cout << "F" << std::endl;
-}
 
 int EngineApplication::run()
 {
@@ -27,18 +23,6 @@ int EngineApplication::run()
 
     Window engineWindow;
     engineWindow.create(1280, 720, title);
-
-    Input::InputManager inputManager;
-    Input::InputEvent e_forceQuit {
-        .name = "force_quit",
-        .device = Input::Device::KEYBOARD,
-        .key = GLFW_KEY_END,
-        .mod = Input::Mod{ .alt = true },
-        .state = GLFW_PRESS,
-        .action = forceQuit
-    };
-
-    inputManager.addEvent(e_forceQuit);
 
     while (running && !engineWindow.shouldClose()) {
         inputManager.processInput(engineWindow.getGlfwWindow());
