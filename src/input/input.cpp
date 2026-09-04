@@ -2,6 +2,7 @@
 #include "GLFW/glfw3.h"
 
 #include <stdexcept>
+#include <iostream>
 
 using namespace Input;
 
@@ -18,33 +19,29 @@ void InputManager::addEvent(InputEvent newEvent)
 
 void InputManager::processInput(GLFWwindow* window)
 {
-    for (unsigned int i = 0; eventsCount; i++) {
-        if (events[i].device == KEYBOARD) {
-            if (glfwGetKey(window, events[i].key) != events[i].state) continue;
-        }
-        else if (events[i].device == MOUSE) {
-            if (glfwGetMouseButton(window, events[i].key) != events[i].state) continue;
-        }
-
-        const int ALT = glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS or
-            glfwGetKey(window, GLFW_KEY_RIGHT_ALT) == GLFW_PRESS;
-        const int CTRL = glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS or
-            glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
-        const int SHIFT = glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS or
-            glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS;
-        const int SUPER = glfwGetKey(window, GLFW_KEY_LEFT_SUPER) == GLFW_PRESS or
-            glfwGetKey(window, GLFW_KEY_RIGHT_SUPER) == GLFW_PRESS;
-
-        if (events[i].mod.alt and events[i].mod.alt != ALT) continue;
-        if (events[i].mod.ctrl and events[i].mod.ctrl != CTRL) continue;
-        if (events[i].mod.shift and events[i].mod.shift != SHIFT) continue;
-        if (events[i].mod.super and events[i].mod.super != SUPER) continue;
-
-        if (!events[i].action) {
-            std::runtime_error("No action bound to event!");
-            return;
+    for (InputEvent event : events) {
+        if (event.device == KEYBOARD) {
+            if (glfwGetKey(window, event.key) == event.state) continue;
+        } else if (event.device == MOUSE) {
+            if (glfwGetMouseButton(window, event.key) == event.state) continue;
+        } else {
+            std::runtime_error("Unknown device!");
+            break;
         }
 
-        events[i].action();
+        const int ALT = glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_ALT) == GLFW_PRESS;
+        const int CTRL = glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
+        const int SHIFT = glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS;
+        const int SUPER = glfwGetKey(window, GLFW_KEY_LEFT_SUPER) == GLFW_PRESS|| glfwGetKey(window, GLFW_KEY_RIGHT_SUPER) == GLFW_PRESS;
+
+        if (event.mod.alt && event.mod.alt != ALT) continue;
+        if (event.mod.ctrl && event.mod.ctrl != CTRL) continue;
+        if (event.mod.shift && event.mod.shift != SHIFT) continue;
+        if (event.mod.super && event.mod.super != SUPER) continue;
+
+        if (event.action) {
+            event.action();
+            std::cout << "Called " << event.name << "." <<std::endl;
+        }
     }
 }

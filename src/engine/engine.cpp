@@ -30,11 +30,15 @@ int EngineApplication::run()
 
     Input::InputManager inputManager;
     Input::InputEvent e_forceQuit {
+        .name = "force_quit",
         .device = Input::Device::KEYBOARD,
-        .key = GLFW_KEY_ESCAPE,
+        .key = GLFW_KEY_END,
+        .mod = Input::Mod{ .alt = true },
         .state = GLFW_PRESS,
         .action = forceQuit
     };
+
+    inputManager.addEvent(e_forceQuit);
 
     while (running && !engineWindow.shouldClose()) {
         inputManager.processInput(engineWindow.getGlfwWindow());

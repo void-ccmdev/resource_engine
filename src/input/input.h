@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
-#include <functional>
+#include <string>
 
 namespace Input {
     struct Mod
@@ -23,6 +23,7 @@ namespace Input {
     {
         using Action = void (*)();
 
+        std::string name = "unnamed_event";
         Device device = KEYBOARD;
         int key;
         Mod mod;
@@ -35,7 +36,7 @@ namespace Input {
             void addEvent(InputEvent newEvent);
             void processInput(GLFWwindow* window);
         private:
-            InputEvent events[64];
+            InputEvent events[32];
             unsigned int eventsCount = 0;
     };
 
