@@ -1,6 +1,6 @@
+#include <glad/glad.h>
 #include "window.h"
 
-#include <GLFW/glfw3.h>
 #include <string>
 #include <stdexcept>
 
