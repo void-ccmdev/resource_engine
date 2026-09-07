@@ -46,6 +46,9 @@ add_executable(
       src/engine/engine.cpp #ENGINE
       src/engine/core/window.cpp #WINDOW
       src/engine/core/input.cpp #INPUT
+
+      src/engine/renderer/renderer.cpp #RENDERER
+      src/engine/renderer/mesh/mesh.cpp #RENDERER / MESH
       )
 
 target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/dependencies/lib)
