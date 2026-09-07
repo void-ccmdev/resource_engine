@@ -41,10 +41,11 @@ add_executable(
       src/main.cpp  #MAIN
       src/glad.c #GLAD
 
+      src/editor/editor.cpp #EDITOR
+
       src/engine/engine.cpp #ENGINE
       src/engine/core/window.cpp #WINDOW
-
-      src/input/input.cpp #INPUT
+      src/engine/core/input.cpp #INPUT
       )
 
 target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/dependencies/lib)

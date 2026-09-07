@@ -41,7 +41,7 @@ void InputManager::processInput(GLFWwindow* window)
 
         if (event.action) {
             event.action();
-            std::cout << "Called " << event.name << "." <<std::endl;
+            //std::cout << "Called " << event.name << "." <<std::endl;
         }
     }
 }
