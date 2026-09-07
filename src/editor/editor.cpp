@@ -15,6 +15,7 @@ int EditorApp::run()
     std::string title = "Resource Engine - Editor";
     
     m_window.create(1280, 720, title);
+
     
     m_window.setClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     while (running && !m_window.shouldClose()) {
