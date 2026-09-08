@@ -19,6 +19,7 @@ int EditorApp::run()
     
     m_window.create(1280, 720, title);
 
+    ImGui_ImplOpenGL3_Init();
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
