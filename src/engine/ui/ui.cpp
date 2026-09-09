@@ -3,7 +3,7 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 
-using namespace Editor;
+using namespace Engine;
 
 bool project_ProjectSettingsShow = false;
 
@@ -113,11 +113,7 @@ void UI::updateUserInterface()
     //Scene Tree Panel
     {
         ImGui::Begin("Scene tree");
-        ImGui::SeparatorText("Scene Tree");
-        if (ImGui::TreeNode("Node3D")) {
-            ImGui::Button("Shit itself!", ImVec2(100,100));
-            ImGui::TreePop();
-        }
+        //Show nodes
         ImGui::End();
     }
 
@@ -132,21 +128,23 @@ void UI::updateUserInterface()
     //Properties Panel
     {
         ImGui::Begin("Properties");
-
+        //Show Properties of nodes
         ImGui::End();
     }
 
     //Filesystem / Assets Panel
     {
         ImGui::Begin("Assets");
-
+        //Browse File system
         ImGui::End();
     }
 
     //Output
     {
         ImGui::Begin("Output");
+        //Print from engine output
         ImGui::Text("----| Resource Engine -- 2026 -- v0.1 alpha |----");
+        
         ImGui::End();
     }
 

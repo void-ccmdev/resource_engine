@@ -72,11 +72,11 @@ add_executable(${CMAKE_PROJECT_NAME}
     src/glad.c
 
     src/editor/editor.cpp
-    src/editor/ui/ui.cpp
 
     src/engine/engine.cpp
     src/engine/core/window.cpp
     src/engine/core/input.cpp
+    src/engine/ui/ui.cpp
 
     src/engine/renderer/renderer.cpp
     src/engine/renderer/mesh/mesh.cpp

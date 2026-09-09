@@ -1,7 +1,6 @@
 #include "editor.h"
-#include "ui/ui.h"
 
-#include <iostream>
+#include "../engine/ui/ui.h"
 
 using namespace Editor;
 
@@ -14,13 +13,14 @@ int EditorApp::run()
     m_window.create(1280, 720, title);
     m_window.setClearColor(0.2f, 0.2f, 0.2f, 0.2f);
 
-    Editor::UI ui;
+    Engine::UI ui;
     ui.initUserInterface(m_window.getGlfwWindow());
-    ui.setStyleColors(Editor::STYLE_COLORS::DARK);
+    ui.setStyleColors(Engine::STYLE_COLORS::DARK);
 
     while (running && !m_window.shouldClose()) {
         m_inputManager.processInput(m_window.getGlfwWindow());
         m_window.pollEvents();
+       
         ui.updateUserInterface();
         m_window.update();
     }
