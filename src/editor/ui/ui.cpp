@@ -5,7 +5,7 @@
 
 using namespace Editor;
 
-void UI::initUserInterface(GLFWwindow* window) 
+void UI::initUserInterface(GLFWwindow* window)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -20,7 +20,7 @@ void UI::initUserInterface(GLFWwindow* window)
     ImGui_ImplOpenGL3_Init("#version 440");
 }
 
-void UI::setStyleColors(STYLE_COLORS theme) 
+void UI::setStyleColors(STYLE_COLORS theme)
 {
     if (theme == STYLE_COLORS::DARK) { ImGui::StyleColorsDark(); }
     else if (theme == STYLE_COLORS::LIGHT) { ImGui::StyleColorsLight(); }
@@ -28,9 +28,9 @@ void UI::setStyleColors(STYLE_COLORS theme)
 
     m_mainScale = ImGui_ImplGlfw_GetContentScaleForMonitor(glfwGetPrimaryMonitor());
     ImGuiStyle& style = ImGui::GetStyle();
-    style.ScaleAllSizes(m_mainScale);      
-    style.FontScaleDpi = m_mainScale;     
-    
+    style.ScaleAllSizes(m_mainScale);
+    style.FontScaleDpi = m_mainScale;
+
     if (m_io && (m_io->ConfigFlags & ImGuiConfigFlags_ViewportsEnable))
     {
         style.WindowRounding = 0.0f;
@@ -51,17 +51,16 @@ void UI::updateUserInterface()
 
     ImGui::Render();
 
-#if defined(_WIN32)
+
     if (m_io && (m_io->ConfigFlags & ImGuiConfigFlags_ViewportsEnable))
     {
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
     }
-#endif
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void UI::destroyUserInterface() 
+void UI::destroyUserInterface()
 {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();

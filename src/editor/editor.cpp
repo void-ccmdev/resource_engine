@@ -7,11 +7,11 @@ using namespace Editor;
 
 
 int EditorApp::run()
-{   
+{
     running = true;
 
     std::string title = "Resource Engine - Editor";
-    
+
     m_window.create(1280, 720, title);
     m_window.setClearColor(0.2f, 0.2f, 0.2f, 0.2f);
 
@@ -19,13 +19,13 @@ int EditorApp::run()
     ui.initUserInterface(m_window.getGlfwWindow());
     ui.setStyleColors(Editor::STYLE_COLORS::LIGHT);
 
-    while (running && !m_window.shouldClose()) { 
+    while (running && !m_window.shouldClose()) {
         m_inputManager.processInput(m_window.getGlfwWindow());
         m_window.pollEvents();
         ui.updateUserInterface();
         m_window.update();
     }
-    
+
     ui.destroyUserInterface();
 
     m_window.close();
