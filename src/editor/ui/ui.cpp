@@ -46,16 +46,17 @@ void UI::updateUserInterface()
 
     ImGui::DockSpaceOverViewport();
 
-    bool show = true;
-    ImGui::ShowDemoWindow(&show);
+    
 
     ImGui::Render();
 
 
     if (m_io && (m_io->ConfigFlags & ImGuiConfigFlags_ViewportsEnable))
     {
+        GLFWwindow* backup_current_context = glfwGetCurrentContext();
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
+        glfwMakeContextCurrent(backup_current_context);
     }
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

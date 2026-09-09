@@ -46,10 +46,11 @@ void Window::update()
 {
     glfwSwapBuffers(m_window);
 
-    glClear(GL_COLOR_BUFFER_BIT);
-
     glfwGetFramebufferSize(m_window, &m_framebufferWidth, &m_framebufferHeight);
     glViewport(0, 0, m_framebufferWidth, m_framebufferHeight);
+
+    
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Window::close()
