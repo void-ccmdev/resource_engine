@@ -5,6 +5,19 @@
 
 using namespace Editor;
 
+bool project_ProjectSettingsShow = false;
+
+////////////////////////////
+//ImGui Editor Definitions//
+////////////////////////////
+
+
+
+////////////////////////////
+//Core Editor UI functions//
+////////////////////////////
+
+
 void UI::initUserInterface(GLFWwindow* window)
 {
     IMGUI_CHECKVERSION();
@@ -38,15 +51,104 @@ void UI::setStyleColors(STYLE_COLORS theme)
     }
 }
 
+
 void UI::updateUserInterface()
 {
+    glfwPollEvents();
+    if (glfwGetWindowAttrib(glfwGetCurrentContext(), GLFW_ICONIFIED) != 0)
+    {
+        ImGui_ImplGlfw_Sleep(10);
+    }
+
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
     ImGui::DockSpaceOverViewport();
 
+    /////////////
+    //editor ui//
+    /////////////
+
+
+    //TopBar
+    {   
+        bool menu_File = false;
+        bool menu_Scene = false;
+        bool menu_Project = false;
+        bool menu_Editor = false;
+        bool menu_Debug = false;
+
+        //bool show = true;
+        //ImGui::ShowDemoWindow(&show);
+
+        if (ImGui::BeginMainMenuBar()) {
+            if (ImGui::BeginMenu("File", &menu_File)) {
+                if (ImGui::MenuItem("New Scene", "Ctrl+N")) {}
+                if (ImGui::MenuItem("Save Scene", "Ctrl+S")) {}
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Project", &menu_Project)) {
+                if (ImGui::MenuItem("Project Settings", "Ctrl+,", &project_ProjectSettingsShow)) {
+                    if (project_ProjectSettingsShow) {
+                        ImGui::BeginChild("Project Settings", ImVec2(500, 500));
+                        ImGui::Text("Shit");
+                        ImGui::EndChild();
+                    }
+                }
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Editor", &menu_Editor)) {
+                if (ImGui::MenuItem("Editor Settings", "Ctrl+Shift+,")) {}
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Debug", &menu_Debug)) {
+                ImGui::EndMenu();
+            }
+
+            ImGui::EndMainMenuBar();
+        }
+    }
     
+    //Scene Tree Panel
+    {
+        ImGui::Begin("Scene tree");
+        ImGui::SeparatorText("Scene Tree");
+        if (ImGui::TreeNode("Node3D")) {
+            ImGui::Button("Shit itself!", ImVec2(100,100));
+            ImGui::TreePop();
+        }
+        ImGui::End();
+    }
+
+    ////Viewport Panel
+    //{
+    //    ImGui::Begin("Viewport");     //LATER!!!
+    //    
+    //    ImGui::End();
+    //}
+
+
+    //Properties Panel
+    {
+        ImGui::Begin("Properties");
+
+        ImGui::End();
+    }
+
+    //Filesystem / Assets Panel
+    {
+        ImGui::Begin("Assets");
+
+        ImGui::End();
+    }
+
+    //Output
+    {
+        ImGui::Begin("Output");
+        ImGui::Text("----| Resource Engine -- 2026 -- v0.1 alpha |----");
+        ImGui::End();
+    }
 
     ImGui::Render();
 

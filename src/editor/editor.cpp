@@ -5,7 +5,6 @@
 
 using namespace Editor;
 
-
 int EditorApp::run()
 {
     running = true;
@@ -17,7 +16,7 @@ int EditorApp::run()
 
     Editor::UI ui;
     ui.initUserInterface(m_window.getGlfwWindow());
-    ui.setStyleColors(Editor::STYLE_COLORS::LIGHT);
+    ui.setStyleColors(Editor::STYLE_COLORS::DARK);
 
     while (running && !m_window.shouldClose()) {
         m_inputManager.processInput(m_window.getGlfwWindow());
