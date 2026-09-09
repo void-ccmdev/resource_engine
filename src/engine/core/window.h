@@ -12,6 +12,7 @@ namespace Engine {
                 std::string& title
             );
 
+            void pollEvents();
             void update();
             void close();
 

@@ -35,15 +35,21 @@ void Window::create(unsigned int width, unsigned int height, std::string& title)
 
     glfwGetFramebufferSize(m_window, &m_framebufferWidth, &m_framebufferHeight);
     glViewport(0, 0, m_framebufferWidth, m_framebufferHeight);
+}
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+void Window::pollEvents()
+{
+    glfwPollEvents();
 }
 
 void Window::update()
 {
-    glfwPollEvents();
-    glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapBuffers(m_window);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glfwGetFramebufferSize(m_window, &m_framebufferWidth, &m_framebufferHeight);
+    glViewport(0, 0, m_framebufferWidth, m_framebufferHeight);
 }
 
 void Window::close()
