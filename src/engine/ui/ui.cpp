@@ -1,9 +1,13 @@
 #include "ui.h"
+#include "imgui.h"
+
+#include "../engine.h"
 
 #include <iostream>
 #include <GLFW/glfw3.h>
 
 using namespace Engine;
+Output output;
 
 bool project_ProjectSettingsShow = false;
 
@@ -16,7 +20,6 @@ bool project_ProjectSettingsShow = false;
 ////////////////////////////
 //Core Editor UI functions//
 ////////////////////////////
-
 
 void UI::initUserInterface(GLFWwindow* window)
 {
@@ -72,7 +75,7 @@ void UI::updateUserInterface()
 
 
     //TopBar
-    {   
+    {
         bool menu_File = false;
         bool menu_Scene = false;
         bool menu_Project = false;
@@ -109,7 +112,7 @@ void UI::updateUserInterface()
             ImGui::EndMainMenuBar();
         }
     }
-    
+
     //Scene Tree Panel
     {
         ImGui::Begin("Scene tree");
@@ -120,7 +123,7 @@ void UI::updateUserInterface()
     ////Viewport Panel
     //{
     //    ImGui::Begin("Viewport");     //LATER!!!
-    //    
+    //
     //    ImGui::End();
     //}
 
@@ -142,9 +145,9 @@ void UI::updateUserInterface()
     //Output
     {
         ImGui::Begin("Output");
-        //Print from engine output
-        ImGui::Text("----| Resource Engine -- 2026 -- v0.1 alpha |----");
-        
+        for (const std::string& line : Engine::getOutputLog()) {
+            ImGui::Text(line.c_str());
+        }
         ImGui::End();
     }
 

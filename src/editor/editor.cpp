@@ -1,6 +1,9 @@
 #include "editor.h"
 
 #include "../engine/ui/ui.h"
+#include "../engine/engine.h"
+
+#include <iostream>
 
 using namespace Editor;
 
@@ -17,13 +20,23 @@ int EditorApp::run()
     ui.initUserInterface(m_window.getGlfwWindow());
     ui.setStyleColors(Engine::STYLE_COLORS::DARK);
 
+    Engine::Output output;
+
     while (running && !m_window.shouldClose()) {
         m_inputManager.processInput(m_window.getGlfwWindow());
         m_window.pollEvents();
-       
+        output.print("Hello!");
+        output.println("New line :3");
+        output.printWarning("Eh...");
+        output.printErr("Oh no :(");
         ui.updateUserInterface();
         m_window.update();
     }
+
+    output.println("Ending!");
+    for (const std::string& line : Engine::getOutputLog()) {
+            std::cout << line;
+        }
 
     ui.destroyUserInterface();
 

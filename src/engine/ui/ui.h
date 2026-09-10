@@ -27,6 +27,6 @@ namespace Engine {
 
     class Panel {
         public:
-            void create(std::string title);
+            //later
     };
 }
