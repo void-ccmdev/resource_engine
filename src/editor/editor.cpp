@@ -13,31 +13,39 @@ int EditorApp::run()
 
     std::string title = "Resource Engine - Editor";
 
+    Engine::Output output;
+
+    output.println("----------------------------------------");
+    output.println("----| Resource Engine - v0.1 alpha |----");
+    output.println("----------------------------------------");
+
+    output.println("Loading application!");
+
     m_window.create(1280, 720, title);
     m_window.setClearColor(0.2f, 0.2f, 0.2f, 0.2f);
+
+    output.println("Initializing Editor UI!");
 
     Engine::UI ui;
     ui.initUserInterface(m_window.getGlfwWindow());
     ui.setStyleColors(Engine::STYLE_COLORS::DARK);
 
-    Engine::Output output;
+    output.println("Initialized successfully!");
 
     while (running && !m_window.shouldClose()) {
         m_inputManager.processInput(m_window.getGlfwWindow());
         m_window.pollEvents();
-        output.print("Hello!");
-        output.println("New line :3");
-        output.printWarning("Eh...");
-        output.printErr("Oh no :(");
-        ui.updateUserInterface();
+
+
+        ui.updateUserInterface(output);
         m_window.update();
     }
 
-    output.println("Ending!");
-    for (const std::string& line : Engine::getOutputLog()) {
-            std::cout << line;
-        }
+    output.println("----------------------------------------");
+    output.println("----|    Exiting Resource Engine   |----");
+    output.println("----------------------------------------");
 
+    ui.updateUserInterface(output);
     ui.destroyUserInterface();
 
     m_window.close();

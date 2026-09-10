@@ -6,6 +6,8 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
+#include "../engine.h"
+
 namespace Engine {
     enum STYLE_COLORS {
         LIGHT,
@@ -15,7 +17,7 @@ namespace Engine {
     class UI final {
         public:
             void initUserInterface(GLFWwindow* window);
-            void updateUserInterface();
+            void updateUserInterface(Engine::Output output);
             void destroyUserInterface();
             void setToDefault();
 

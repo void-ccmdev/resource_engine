@@ -7,9 +7,9 @@
 #include <GLFW/glfw3.h>
 
 using namespace Engine;
-Output output;
+//\Output output;
 
-bool project_ProjectSettingsShow = false;
+bool project_ProjectSettingsShow = true;
 
 ////////////////////////////
 //ImGui Editor Definitions//
@@ -55,7 +55,7 @@ void UI::setStyleColors(STYLE_COLORS theme)
 }
 
 
-void UI::updateUserInterface()
+void UI::updateUserInterface(Engine::Output output)
 {
     glfwPollEvents();
     if (glfwGetWindowAttrib(glfwGetCurrentContext(), GLFW_ICONIFIED) != 0)
@@ -78,7 +78,7 @@ void UI::updateUserInterface()
     {
         bool menu_File = false;
         bool menu_Scene = false;
-        bool menu_Project = false;
+        bool menu_Project = true;
         bool menu_Editor = false;
         bool menu_Debug = false;
 
@@ -87,25 +87,21 @@ void UI::updateUserInterface()
 
         if (ImGui::BeginMainMenuBar()) {
             if (ImGui::BeginMenu("File", &menu_File)) {
-                if (ImGui::MenuItem("New Scene", "Ctrl+N")) {}
-                if (ImGui::MenuItem("Save Scene", "Ctrl+S")) {}
+                //Later!
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Project", &menu_Project)) {
-                if (ImGui::MenuItem("Project Settings", "Ctrl+,", &project_ProjectSettingsShow)) {
-                    if (project_ProjectSettingsShow) {
-                        ImGui::BeginChild("Project Settings", ImVec2(500, 500));
-                        ImGui::Text("Shit");
-                        ImGui::EndChild();
-                    }
+                if (ImGui::MenuItem("Project Settings", "Ctrl+,")) {
+                    output.print("Fuck you settings!");
                 }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Editor", &menu_Editor)) {
-                if (ImGui::MenuItem("Editor Settings", "Ctrl+Shift+,")) {}
+                //Later!
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Debug", &menu_Debug)) {
+                //Later!
                 ImGui::EndMenu();
             }
 
@@ -145,8 +141,9 @@ void UI::updateUserInterface()
     //Output
     {
         ImGui::Begin("Output");
-        for (const std::string& line : Engine::getOutputLog()) {
-            ImGui::Text(line.c_str());
+        for (const std::string& line : output.getOutputLog()) {
+            //ImGui::Text(line.c_str()); (This was a prototype but I kept it bc its nice to look at it ;])
+            ImGui::Selectable(line.c_str());
         }
         ImGui::End();
     }
