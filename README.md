@@ -4,9 +4,14 @@
 >[!Note]
 > THIS GAME ENGINE IS NOT FUNCTIONAL YET!
 
+Required dependencies 
+ ```bash
+ sudo pacman -S cmake glfw
+ ```
+
 How to setup build?
 ```bash
-cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B build
+cmake -B build
 ```
 
 How to build?
