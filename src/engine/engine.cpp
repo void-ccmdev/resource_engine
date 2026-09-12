@@ -3,14 +3,13 @@
 #include "ui/ui.h"
 #include "core/input.h"
 #include "core/window.h"
+#include "renderer/renderer.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
 
 using namespace Engine;
-
-Output output;
 
 void Output::print(std::string value) { std::cout << value.c_str(); m_log.push_back(value); }
 void Output::println(std::string value) { std::cout << value.c_str() << std::endl; m_log.push_back(value + "\n"); }

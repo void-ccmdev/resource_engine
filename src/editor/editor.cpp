@@ -2,6 +2,7 @@
 
 #include "../engine/ui/ui.h"
 #include "../engine/engine.h"
+#include "../engine/renderer/renderer.h"
 
 #include <iostream>
 
@@ -14,6 +15,7 @@ int EditorApp::run()
     std::string title = "Resource Engine - Editor";
 
     Engine::Output output;
+    Engine::Renderer renderer;
 
     output.println("----------------------------------------");
     output.println("----| Resource Engine - v0.1 alpha |----");
@@ -36,14 +38,11 @@ int EditorApp::run()
         m_inputManager.processInput(m_window.getGlfwWindow());
         m_window.pollEvents();
 
+        renderer.render();
 
         ui.updateUserInterface(output);
         m_window.update();
     }
-
-    output.println("----------------------------------------");
-    output.println("----|    Exiting Resource Engine   |----");
-    output.println("----------------------------------------");
 
     ui.updateUserInterface(output);
     ui.destroyUserInterface();

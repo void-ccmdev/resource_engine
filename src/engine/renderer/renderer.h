@@ -1,3 +1,8 @@
 #pragma once
 
-//To be Finished
+namespace Engine {
+    class Renderer {
+        public:
+            void render();
+    };
+}
