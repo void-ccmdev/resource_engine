@@ -15,7 +15,7 @@ int EditorApp::run()
     std::string title = "Resource Engine - Editor";
 
     Engine::Output output;
-    Engine::Renderer renderer;
+    //Engine::Renderer renderer;
 
     output.println("----------------------------------------");
     output.println("----| Resource Engine - v0.1 alpha |----");
@@ -30,7 +30,7 @@ int EditorApp::run()
 
     Engine::UI ui;
     ui.initUserInterface(m_window.getGlfwWindow());
-    ui.setStyleColors(Engine::STYLE_COLORS::DARK);
+    ui.setStyleColors(Engine::STYLE_COLORS::LIGHT);
 
     output.println("Initialized successfully!");
 
@@ -38,7 +38,7 @@ int EditorApp::run()
         m_inputManager.processInput(m_window.getGlfwWindow());
         m_window.pollEvents();
 
-        renderer.render();
+        //renderer.render();
 
         ui.updateUserInterface(output);
         m_window.update();
