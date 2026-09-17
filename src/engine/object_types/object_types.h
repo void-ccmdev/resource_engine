@@ -6,8 +6,8 @@
 #include <string>
 
 namespace NodeTypes {
-    struct Object 
-    {   
+    struct Object
+    {
         std::string name;
 
         glm::vec3 position;

@@ -4,7 +4,6 @@
 #include <vector>
 
 namespace DataTypes {
-
     struct Vertex
     {
         glm::vec3 position;

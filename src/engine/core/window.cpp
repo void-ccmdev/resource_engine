@@ -62,7 +62,7 @@ void Window::close()
     }
 
     glfwDestroyWindow(m_window);
-    glfwTerminate();
+    //glfwTerminate();
 }
 
 void Window::setTitle(std::string& title) { glfwSetWindowTitle(m_window, title.c_str()); }

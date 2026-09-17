@@ -68,7 +68,9 @@ target_link_libraries(imgui PUBLIC
 # --------------------------------------------------
 
 add_executable(${CMAKE_PROJECT_NAME}
-    src/main.cpp
+    src/sandbox/sandbox.cpp
+
+    #src/main.cpp
     src/glad.c
 
     src/editor/editor.cpp

@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 
+#include "core/window.h"
+#include "core/input.h"
+
 namespace Engine
 {
     class Output {
@@ -15,5 +18,28 @@ namespace Engine
             std::vector<std::string> getOutputLog();
         private:
             std::vector<std::string> m_log;
+    };
+
+    class WindowServer {
+        public:
+            void createWindow(unsigned int width, unsigned int height, std::string& title);
+            void setWindowTitle(std::string& title, Window window);
+            void updateWindow(Window window);
+            void closeWindow(Window window);
+
+            bool shouldWindowClose(Window window);
+            void setWindowShouldClose(Window window, bool value);
+
+            Window getCurrentWindow();
+        private:
+            Window m_currentWindow;
+    };
+
+    class InputServer {
+        public:
+            void addEvent(Input::InputEvent newEvent);
+            void processInput(Window window);
+        private:
+            Input::InputManager m_inputManager;
     };
 } // namespace Engine

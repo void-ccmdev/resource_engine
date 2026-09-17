@@ -28,9 +28,9 @@ int EditorApp::run()
 
     output.println("Initializing Editor UI!");
 
-    Engine::UI ui;
-    ui.initUserInterface(m_window.getGlfwWindow());
-    ui.setStyleColors(Engine::STYLE_COLORS::LIGHT);
+   //Engine::UI ui;
+   //ui.initUserInterface(m_window.getGlfwWindow());
+   //ui.setStyleColors(Engine::STYLE_COLORS::LIGHT);
 
     output.println("Initialized successfully!");
 
@@ -40,12 +40,12 @@ int EditorApp::run()
 
         //renderer.render();
 
-        ui.updateUserInterface(output);
+       //ui.updateUserInterface(output);
         m_window.update();
     }
 
-    ui.updateUserInterface(output);
-    ui.destroyUserInterface();
+    //ui.updateUserInterface(output);
+    //ui.destroyUserInterface();
 
     m_window.close();
 
