@@ -6,6 +6,7 @@
 Engine::Output output;
 Engine::WindowServer windowServer;
 Engine::InputServer inputServer;
+Engine::UIServer uiServer;
 
 std::string title = "Hello world!";
 unsigned int width = 500, height = 500;
@@ -19,8 +20,9 @@ void quitAction() {
 
 int main()
 {   
-    output.print("Running!");
+    output.println("Running!");
     windowServer.createWindow(width, height, title);
+    uiServer.initialize();
 
     Input::InputEvent event;
     {
@@ -36,11 +38,13 @@ int main()
     {
         inputServer.processInput(windowServer.getCurrentWindow());
         windowServer.updateWindow(windowServer.getCurrentWindow());
+        uiServer.update();
     }
 
+    uiServer.destroy();
     windowServer.closeWindow(windowServer.getCurrentWindow());
 
-    output.print("Closing!");
+    output.println("Closing!");
 
     return 0;
 }

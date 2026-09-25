@@ -1,7 +1,4 @@
 #include "ui.h"
-#include "imgui.h"
-
-#include "../engine.h"
 
 #include <iostream>
 #include <GLFW/glfw3.h>
@@ -11,17 +8,7 @@ using namespace Engine;
 
 bool project_ProjectSettingsShow = true;
 
-////////////////////////////
-//ImGui Editor Definitions//
-////////////////////////////
-
-
-
-////////////////////////////
-//Core Editor UI functions//
-////////////////////////////
-
-void UI::initUserInterface(GLFWwindow* window)
+void UI::initUserInterface()
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -32,14 +19,14 @@ void UI::initUserInterface(GLFWwindow* window)
     m_io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     m_io->ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplGlfw_InitForOpenGL(glfwGetCurrentContext(), true);
     ImGui_ImplOpenGL3_Init("#version 440");
 }
 
-void UI::setStyleColors(STYLE_COLORS theme)
+void UI::setStyleColors(UI_STYLE_COLORS theme)
 {
-    if (theme == STYLE_COLORS::DARK) { ImGui::StyleColorsDark(); }
-    else if (theme == STYLE_COLORS::LIGHT) { ImGui::StyleColorsLight(); }
+    if (theme == UI_STYLE_COLORS::DARK) { ImGui::StyleColorsDark(); }
+    else if (theme == UI_STYLE_COLORS::LIGHT) { ImGui::StyleColorsLight(); }
     else { std::cout << "No ImGui theme selected -> using default theme (DARK)"; ImGui::StyleColorsDark(); }
 
     m_mainScale = ImGui_ImplGlfw_GetContentScaleForMonitor(glfwGetPrimaryMonitor());
@@ -55,7 +42,7 @@ void UI::setStyleColors(STYLE_COLORS theme)
 }
 
 
-void UI::updateUserInterface(Engine::Output output)
+void UI::updateUserInterface()
 {
     glfwPollEvents();
     if (glfwGetWindowAttrib(glfwGetCurrentContext(), GLFW_ICONIFIED) != 0)
@@ -69,84 +56,9 @@ void UI::updateUserInterface(Engine::Output output)
 
     ImGui::DockSpaceOverViewport();
 
-    /////////////
-    //editor ui//
-    /////////////
-
-
-    //TopBar
-    {
-        bool menu_File = false;
-        bool menu_Scene = false;
-        bool menu_Project = true;
-        bool menu_Editor = false;
-        bool menu_Debug = false;
-
-        //bool show = true;
-        //ImGui::ShowDemoWindow(&show);
-
-        if (ImGui::BeginMainMenuBar()) {
-            if (ImGui::BeginMenu("File", &menu_File)) {
-                //Later!
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu("Project", &menu_Project)) {
-                if (ImGui::MenuItem("Project Settings", "Ctrl+,")) {
-                    output.print("Fuck you settings!");
-                }
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu("Editor", &menu_Editor)) {
-                //Later!
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu("Debug", &menu_Debug)) {
-                //Later!
-                ImGui::EndMenu();
-            }
-
-            ImGui::EndMainMenuBar();
-        }
-    }
-
-    //Scene Tree Panel
-    {
-        ImGui::Begin("Scene tree");
-        //Show nodes
-        ImGui::End();
-    }
-
-    ////Viewport Panel
-    //{
-    //    ImGui::Begin("Viewport");     //LATER!!!
-    //
-    //    ImGui::End();
-    //}
-
-
-    //Properties Panel
-    {
-        ImGui::Begin("Properties");
-        //Show Properties of nodes
-        ImGui::End();
-    }
-
-    //Filesystem / Assets Panel
-    {
-        ImGui::Begin("Assets");
-        //Browse File system
-        ImGui::End();
-    }
-
-    //Output
-    {
-        ImGui::Begin("Output");
-        for (const std::string& line : output.getOutputLog()) {
-            //ImGui::Text(line.c_str()); (This was a prototype but I kept it bc its nice to look at it ;])
-            ImGui::Selectable(line.c_str());
-        }
-        ImGui::End();
-    }
+    //SMTH
+    bool show = true;
+    ImGui::ShowDemoWindow(&show);
 
     ImGui::Render();
 

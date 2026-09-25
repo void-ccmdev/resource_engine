@@ -42,3 +42,11 @@ Window WindowServer::getCurrentWindow() { return m_currentWindow; }
 
 void InputServer::addEvent(Input::InputEvent newEvent) { m_inputManager.addEvent(newEvent); }
 void InputServer::processInput(Window window) { m_inputManager.processInput(window.getGlfwWindow()); }
+
+/////////////////////////
+///////   -UI-  /////////
+/////////////////////////
+
+void UIServer::initialize() { m_ui.initUserInterface(); }
+void UIServer::update() { m_ui.updateUserInterface(); }
+void UIServer::destroy() { m_ui.destroyUserInterface(); }
